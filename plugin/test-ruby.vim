@@ -35,12 +35,12 @@ function! s:run_test(param)
   endif
 endfunction
 
-function! RunCurrentLineInTest()
+function! s:run_current_line_in_test()
   call s:run_test('%:' . line('.'))
 endfunction
-command! RunCurrentLineInTest call RunCurrentLineInTest()
+command! RunCurrentLineInTest call s:run_current_line_in_test()
 
-function! RunTestFile()
+function! s:run_test_file()
   call s:run_test('%')
 endfunction
-command! RunTestFile call RunTestFile()
+command! RunTestFile call s:run_test_file()

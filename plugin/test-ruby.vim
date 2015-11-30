@@ -1,20 +1,18 @@
-"==========================================================================================
-" File:           vim-test-ruby.vim
-" Author:         Jamal El Milahi
-" Version:        0.0.1
-" Description:    Run Ruby/Rails test either with RSpec or Spin if it's detected
-"==========================================================================================
+" ==============================================================================
+" File:          vim-test-ruby.vim
+" Author:        Jamal El Milahi
+" Version:       0.0.1
+" Description:   Run Ruby/Rails test with Spin
+" ==============================================================================
 "
 " To run the whole file
 " :RunTestFile
 " To run a specific test
 " :RunCurrentLineInTest
+
 " -------------------------------------
 " run Ruby tests
 " --------------------------------------
-function! s:spin_or_rspec()
-  return system('ps ax | grep "spin serve" | grep -v grep') != '' ? 'spin push' : 'rspec'
-endfunction
 
 function! s:is_a_test_file()
   return match(expand('%:t'), '_spec.rb$') > 0
@@ -29,7 +27,7 @@ endfunction
 function! s:run_test(param)
   if s:is_a_test_file()
     exec ':wa'
-    exec ':! ' . s:spin_or_rspec() . ' ' . a:param
+    exec ':!spin push ' . a:param
   else
     call s:print_warning() | return
   endif
